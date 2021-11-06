@@ -58,6 +58,13 @@ if (isBrowser) {
         mount: [['/dist/iife', './dist/iife']],
         open: false,
         wait: 500,
+        middleware: [
+            function(req, res, next) {
+                res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+                res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+                next();
+            },
+        ],
     }));
 } else {
     config.output.push({
